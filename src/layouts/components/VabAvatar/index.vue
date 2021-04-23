@@ -11,7 +11,7 @@
 
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="config" divided>配置</el-dropdown-item>
-      <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+      <el-dropdown-item command="logout" divided>退出系统</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>

@@ -2,12 +2,12 @@
   <div class="login-container">
     <el-form ref="form" :model="form" :rules="rules" class="login-form">
       <div class="title">
-        <img alt src="@/assets/images/login/trq-logo.png" />
+        <img alt src="@/assets/images/login/trqLogo.png" />
       </div>
       <div class="title-tips">欢迎来到{{ title }}！</div>
       <el-form-item style="margin-top: 40px" prop="username">
         <span class="svg-container svg-container-admin">
-          <vab-icon :icon="['fas', 'user']" />
+          <svg-icon icon-class="user"></svg-icon>
         </span>
         <el-input
           v-model.trim="form.username"
@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
-          <vab-icon :icon="['fas', 'lock']" />
+          <svg-icon icon-class="lock"></svg-icon>
         </span>
         <el-input
           :key="passwordType"
@@ -35,10 +35,10 @@
           class="show-password"
           @click="handlePassword"
         >
-          <vab-icon :icon="['fas', 'eye-slash']"></vab-icon>
+          <svg-icon icon-class="eyeslash"></svg-icon>
         </span>
         <span v-else class="show-password" @click="handlePassword">
-          <vab-icon :icon="['fas', 'eye']"></vab-icon>
+          <svg-icon icon-class="eye"></svg-icon>
         </span>
       </el-form-item>
       <el-button

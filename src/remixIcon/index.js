@@ -1,3 +1,7 @@
+import Vue from 'vue'
+import SvgIcon from '@/components/SvgIcon'
+Vue.component('SvgIcon', SvgIcon)
+
 const req = require.context('./svg', false, /\.svg$/),
   requireAll = (requireContext) => {
     /*let a = requireContext.keys().map(requireContext);

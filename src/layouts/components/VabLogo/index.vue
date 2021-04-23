@@ -1,11 +1,7 @@
 <template>
   <div :class="'logo-container-' + layout">
     <router-link to="/">
-      <img
-        class="logo"
-        src="@/assets/images/layout/trq-logo.png"
-        alt="淘人气"
-      />
+      <img class="logo" src="@/assets/images/layout/trqLogo.png" alt="淘人气" />
       <span
         class="title"
         :class="{ 'hidden-xs-only': layout === 'horizontal' }"

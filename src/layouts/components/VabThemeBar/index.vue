@@ -1,13 +1,13 @@
 <template>
   <span v-if="themeBar">
-    <vab-icon
+    <svg-icon
       title="主题配置"
-      :icon="['fas', 'palette']"
+      icon-class="palette"
       @click="handleOpenThemeBar"
-    />
+    ></svg-icon>
     <div class="theme-bar-setting">
       <div @click="handleOpenThemeBar">
-        <vab-icon :icon="['fas', 'palette']" />
+        <svg-icon icon-class="palette" class="fill-white"></svg-icon>
         <p>主题配置</p>
       </div>
     </div>
@@ -207,6 +207,11 @@
         font-size: 20px;
         color: $base-color-white;
         fill: $base-color-white;
+      }
+
+      svg.fill-white {
+        color: #fff;
+        margin: 0 auto;
       }
     }
   }

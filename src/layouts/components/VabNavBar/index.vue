@@ -15,20 +15,15 @@
       <el-col :xs="20" :sm="12" :md="12" :lg="12" :xl="12">
         <div class="right-panel">
           <vab-error-log />
-          <vab-full-screen-bar @refresh="refreshRoute" />
+          <full-screen-bar @refresh="refreshRoute" />
           <vab-theme-bar class="hidden-xs-only" />
-          <vab-icon
+          <svg-icon
             title="重载所有路由"
-            :pulse="pulse"
-            :icon="['fas', 'redo']"
+            icon-class="redo"
             @click="refreshRoute"
-          />
+          ></svg-icon>
+          <!-- <svg-icon title="退出系统" icon-class="signoutalt" @click="logout"></svg-icon> -->
           <vab-avatar />
-          <!--  <vab-icon
-            title="退出系统"
-            :icon="['fas', 'sign-out-alt']"
-            @click="logout"
-          />-->
         </div>
       </el-col>
     </el-row>
@@ -37,9 +32,12 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-
+  import FullScreenBar from '@/components/FullScreenBar'
   export default {
     name: 'VabNavBar',
+    components: {
+      FullScreenBar,
+    },
     data() {
       return {
         pulse: false,
