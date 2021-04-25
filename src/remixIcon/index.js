@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import SvgIcon from '@/components/SvgIcon'
+import SvgIcon from './SvgIcon'
 Vue.component('SvgIcon', SvgIcon)
 
 const req = require.context('./svg', false, /\.svg$/),

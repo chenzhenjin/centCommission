@@ -106,11 +106,6 @@ module.exports = {
             priority: 20,
             test: /[\\/]node_modules[\\/]_?element-ui(.*)/,
           },
-          fortawesome: {
-            name: 'chunk-fortawesome',
-            priority: 20,
-            test: /[\\/]node_modules[\\/]_?@fortawesome(.*)/,
-          },
         },
       })
       config

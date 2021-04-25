@@ -1,29 +1,5 @@
 <template>
   <div class="goods-list-container">
-    <vab-query-form>
-      <vab-query-form-right-panel :span="24">
-        <el-form
-          ref="form"
-          :model="queryForm"
-          :inline="true"
-          @submit.native.prevent
-        >
-          <el-form-item>
-            <el-input v-model="queryForm.title" placeholder="商品名称" />
-          </el-form-item>
-          <el-form-item>
-            <el-button
-              icon="el-icon-search"
-              type="primary"
-              native-type="submit"
-              @click="handleQuery"
-            >
-              查询
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </vab-query-form-right-panel>
-    </vab-query-form>
     <el-row :gutter="20">
       <el-col
         v-for="(item, index) in list"

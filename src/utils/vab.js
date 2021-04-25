@@ -168,7 +168,7 @@ const install = (Vue, opts = {}) => {
   }
 
   /* 全局lodash */
-  Vue.prototype.$baseLodash = lodash
+  // Vue.prototype.$baseLodash = lodash
   /* 全局事件总线 */
   Vue.prototype.$baseEventBus = new Vue()
 }

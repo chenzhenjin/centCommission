@@ -1,0 +1,17 @@
+.el-button {
+  &--primary {
+    background-color: $base-color-orange !important;
+    border-color: $base-color-orange !important;
+    color: #fff;
+    border-radius: 5px;
+    &:hover {
+      background-color: $base-color-orange !important;
+      border-color: $base-color-orange !important;
+      color: #fff;
+      opacity: 0.7;
+    }
+  }
+}
+.inline-center {
+  text-align: center;
+}

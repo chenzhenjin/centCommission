@@ -2,7 +2,7 @@
  * @Author: vue-admin-beautiful
  * @Email: BrotherStudy@163.com
  * @Date: 2021-04-22 17:30:26
- * @LastEditTime: 2021-04-23 14:54:23
+ * @LastEditTime: 2021-04-25 12:45:50
  * @Descripttion: 模块描述
  */
 /**
@@ -49,7 +49,7 @@ const setting = {
   //token名称
   tokenName: 'accessToken',
   //token在localStorage、sessionStorage存储的key的名称
-  tokenTableName: 'vue-admin-beautiful-2021',
+  tokenTableName: 'trq-cent-commission',
   //token存储位置localStorage sessionStorage
   storage: 'localStorage',
   //token失效回退到登录页时是否记录本次的路由

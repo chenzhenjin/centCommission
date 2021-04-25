@@ -69,12 +69,17 @@ const actions = {
     }
   },
   async getUserInfo({ commit, state }) {
-    const { data } = await getUserInfo(state.accessToken)
-    if (!data) {
-      Vue.prototype.$baseMessage('验证失败，请重新登录...', 'error')
-      return false
+    // const { data } = await getUserInfo(state.accessToken)
+    // if (!data) {
+    //   Vue.prototype.$baseMessage('验证失败，请重新登录...', 'error')
+    //   return false
+    // }
+    // let { permissions, username, avatar } = data
+    let { permissions, username, avatar } = {
+      permissions: ['firstAgency'],
+      username: 'chenzhenjin',
+      avatar: '',
     }
-    let { permissions, username, avatar } = data
     if (permissions && username && Array.isArray(permissions)) {
       commit('setPermissions', permissions)
       commit('setUsername', username)

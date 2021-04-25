@@ -2,7 +2,7 @@
   <el-dropdown @command="handleCommand">
     <span class="avatar-dropdown">
       <!--<el-avatar class="user-avatar" :src="avatar"></el-avatar>-->
-      <img class="user-avatar" :src="avatar" alt="" />
+      <!-- <img class="user-avatar" :src="avatar" alt="" /> -->
       <div class="user-name">
         {{ username }}
         <i class="el-icon-arrow-down el-icon--right"></i>
@@ -10,7 +10,7 @@
     </span>
 
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="config" divided>配置</el-dropdown-item>
+      <el-dropdown-item command="config" divided>账号设置</el-dropdown-item>
       <el-dropdown-item command="logout" divided>退出系统</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -39,8 +39,7 @@
         }
       },
       config() {
-        console.log('配置跳转')
-        // this.$router.push('/personalCenter/personalCenter')
+        this.$router.push('/userCenter/config')
       },
       logout() {
         this.$baseConfirm(

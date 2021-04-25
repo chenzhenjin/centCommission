@@ -1,3 +1,10 @@
+/*
+ * @Author: chenzhenjin
+ * @Email: BrotherStudy@163.com
+ * @Date: 2021-04-22 17:30:26
+ * @LastEditTime: 2021-04-25 13:34:26
+ * @Descripttion: 路由拦截和路由组件动态加载
+ */
 /**
  * @author vue-admin-beautiful （不想保留author可删除）
  * @description 路由守卫，目前两种模式：all模式与intelligence模式
@@ -54,7 +61,7 @@ router.beforeResolve(async (to, from, next) => {
           } else if (authentication === 'all') {
             accessRoutes = await store.dispatch('routes/setAllRoutes')
           }
-          router.addRoutes(accessRoutes)
+          router.addRoutes(accessRoutes) //动态加载组件view
           next({ ...to, replace: true })
         } catch {
           await store.dispatch('user/resetAccessToken')
