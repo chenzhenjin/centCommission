@@ -18,7 +18,6 @@ if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('@/utils/static')
   mockXHR()
 }
-
 Vue.config.productionTip = false
 
 new Vue({

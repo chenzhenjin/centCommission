@@ -218,10 +218,10 @@
       checkRatioError(value) {
         const pattern = /\.[0-9]{2}/
         const test = pattern.test(value)
-        if (test) {
-          return '只能输入一位小数'
-        } else if (+value > 30) {
+        if (+value > 30) {
           return '不能超过30'
+        } else if (test) {
+          return '只能输入一位小数'
         }
       },
       editorRatio({ row, $index }) {
