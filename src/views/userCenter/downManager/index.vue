@@ -3,7 +3,7 @@
     <div class="content">
       <div class="top">
         <el-button type="primary" @click="dialogVisible = true">
-          创建下级账号
+          创建下级账号{{ showEnv }}
         </el-button>
       </div>
       <div class="main">
@@ -20,13 +20,27 @@
             width="300"
           >
             <template slot-scope="slotScope">
-              <el-input
-                v-model="slotScope.row.myRatio"
-                v-debounce-input="(event) => tableInput(slotScope, event)"
-                debounce-second="0.5"
-                placeholder="未设置"
-                :disabled="slotScope.row.myRatioDisable"
-              ></el-input>
+              <div class="cell-form">
+                <el-input
+                  v-model="slotScope.row.myRatio"
+                  v-debounce-input="(event) => tableInput(slotScope, event)"
+                  class="input-ratio"
+                  debounce-second="0.5"
+                  placeholder="未设置"
+                  :disabled="slotScope.row.myRatioDisable"
+                ></el-input>
+                <el-button
+                  v-show="!slotScope.row.myRatioDisable"
+                  class="save-ratio blue-btn"
+                  type="text"
+                  @click="saveRatio(slotScope)"
+                >
+                  保存
+                </el-button>
+              </div>
+              <span class="error">
+                {{ slotScope.row.showError }}
+              </span>
             </template>
           </el-table-column>
           <el-table-column
@@ -38,20 +52,27 @@
             <template slot-scope="slotScope">
               <el-input
                 v-model="slotScope.row.oppositeRatio"
+                class="input-ratio"
                 placeholder="未设置"
                 disabled
               ></el-input>
-              <el-button type="text" @click="saveRatio(slotScope)">
-                保存
-              </el-button>
             </template>
           </el-table-column>
           <el-table-column align="center" label="操作">
             <template slot-scope="slotScope">
-              <el-button type="text" @click="editorRatio(slotScope)">
+              <el-button
+                v-show="slotScope.row.myRatioDisable"
+                class="blue-btn"
+                type="text"
+                @click="editorRatio(slotScope)"
+              >
                 编辑
               </el-button>
-              <el-button type="text" @click="deleteAccount(slotScope)">
+              <el-button
+                class="red-btn"
+                type="text"
+                @click="deleteAccount(slotScope)"
+              >
                 删除
               </el-button>
             </template>
@@ -87,10 +108,12 @@
 
 <script>
   import { confirmPasswordValidate } from '@/utils/validator'
+  import { floatHandle } from '@/utils/float'
   export default {
     name: 'DownManager',
     data() {
       return {
+        showEnv: process.env.VUE_APP_WEBEVN,
         form: {
           account: '',
           newPassword: '',
@@ -153,12 +176,14 @@
             account: '132',
             myRatio: '10',
             myRatioDisable: true,
+            showError: '',
             oppositeRatio: '20',
           },
           {
             account: '132456',
             myRatio: '15',
             myRatioDisable: true,
+            showError: '',
             oppositeRatio: '15',
           },
         ],
@@ -170,14 +195,34 @@
     methods: {
       tableInput({ row, $index }, event) {
         console.log('tableInput', row, event)
-        let myRatio = +event.target.value
+        let showError = this.checkRatioError(event.target.value)
+        if (showError) {
+          this.tableData.splice($index, 1, {
+            ...row,
+            myRatio: event.target.value + '',
+            myRatioDisable: false,
+            showError,
+          })
+          return
+        }
+        let myRatio = floatHandle(+event.target.value, 1)
         this.tableData.splice($index, 1, {
           ...row,
           myRatio: myRatio + '',
-          oppositeRatio: 30 - myRatio + '',
           myRatioDisable: false,
+          showError,
+          oppositeRatio: 30 - myRatio + '',
         })
         console.log('this.tableData', this.tableData)
+      },
+      checkRatioError(value) {
+        const pattern = /\.[0-9]{2}/
+        const test = pattern.test(value)
+        if (test) {
+          return '只能输入一位小数'
+        } else if (+value > 30) {
+          return '不能超过30'
+        }
       },
       editorRatio({ row, $index }) {
         this.tableData.splice($index, 1, {
@@ -186,6 +231,10 @@
         })
       },
       saveRatio({ row, $index }) {
+        if (row.showError) {
+          this.$baseMessage('请按照错误提示正确修改分佣比例', 'error')
+          return
+        }
         this.tableData.splice($index, 1, {
           ...row,
           myRatioDisable: true,
@@ -219,10 +268,33 @@
     font-size: 20px;
     font-weight: bold;
   }
+  .error {
+    color: $base-color-red;
+  }
   ::v-deep .el-form {
     width: 500px;
   }
-  ::v-deep .el-table .el-input {
-    width: 100px;
+  ::v-deep .save-ratio {
+    position: absolute;
+    right: 20px;
+  }
+  ::v-deep .red-btn {
+    color: $base-color-red;
+  }
+  ::v-deep .blue-btn {
+    color: $base-color-blue;
+  }
+  .main {
+    margin-top: 20px;
+    .input-ratio {
+      position: relative;
+      width: 80px;
+      &::after {
+        position: absolute;
+        content: '%';
+        top: 4px;
+        right: 5px;
+      }
+    }
   }
 </style>

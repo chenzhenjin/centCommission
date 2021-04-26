@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-import './plugins' //加载第三库 自定义svg 路由 报错 挂载vue实例变量
+import './plugins' //加载第三库 自定义svg 路由 报错 挂载vue弹框 提示 确认等等
 import '@/layouts/export' //加载布局组件
 import '@/components/export' //加载全局组件
 import directive from '@/directive' //加载全局指令

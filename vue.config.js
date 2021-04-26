@@ -35,6 +35,8 @@ const mockServer = () => {
   else return ''
 }
 
+const TerserPlugin = require('terser-webpack-plugin')
+
 module.exports = {
   publicPath,
   assetsDir,
@@ -70,6 +72,23 @@ module.exports = {
   chainWebpack(config) {
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
+
+    config.when(process.env.NODE_ENV !== 'development', (config) => {
+      config.optimization.minimizer('terser').tap((args) => {
+        // 注释console.*
+        args[0].terserOptions.compress.drop_console = true
+        // remove debugger
+        args[0].terserOptions.compress.drop_debugger = true
+        // 移除 console.log
+        args[0].terserOptions.compress.pure_funcs = ['console.log']
+        // 去掉注释 如果需要看chunk-vendors公共部分插件，可以注释掉就可以看到注释了
+        args[0].terserOptions.output = {
+          comments: false,
+        }
+        return args
+      })
+    })
+
     config.module
       .rule('svg')
       .exclude.add(resolve('src/remixIcon'))
